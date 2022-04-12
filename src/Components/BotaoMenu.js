@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Image, StyleSheet, TouchableOpacity, Text} from 'react-native';
 
 const BotaoMenu = ({navigation, nome, imagem, route}) => {
-  //Padrnozação dos botões do menu inicial
+  //Padronização dos botões do menu inicial
   return (
     <View
       style={{

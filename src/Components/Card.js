@@ -23,7 +23,7 @@ const Card = ({tipo, dados, lista}) => {
         <View
           style={{
             margin: 16,
-            maxWidth: 150,
+            maxWidth: tipo === 'episodio' ? 500 : 150,
           }}>
           <Text style={{fontWeight: 'bold', lineHeight: 18}}>
             Nome: {dados.name}

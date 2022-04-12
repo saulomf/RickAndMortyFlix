@@ -73,6 +73,7 @@ const Episodios = ({navigation}) => {
       style={{
         backgroundColor: '#404040',
         alignItems: 'center',
+        flex: 1,
       }}>
       <TextInput
         style={{
@@ -120,7 +121,6 @@ const Episodios = ({navigation}) => {
         renderItem={renderItem}
         keyExtractor={index => index.id}
       />
-      <View style={{height: 100}} />
     </View>
   );
 };

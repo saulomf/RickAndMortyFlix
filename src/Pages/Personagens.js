@@ -82,6 +82,7 @@ const Personagens = ({navigation}) => {
       style={{
         backgroundColor: '#404040',
         alignItems: 'center',
+        flex: 1,
       }}>
       <TextInput
         style={{
@@ -130,7 +131,6 @@ const Personagens = ({navigation}) => {
         keyExtractor={index => index.id}
         extraData={personagens}
       />
-      <View style={{height: 100}} />
     </View>
   );
 };
