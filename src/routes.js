@@ -4,6 +4,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Home from './Pages/Home';
 import Personagens from './Pages/Personagens';
 import Episodios from './Pages/Episodios';
+import Locais from './Pages/Locais';
 
 const Stack = createNativeStackNavigator();
 
@@ -23,6 +24,7 @@ const Routes = () => {
             component={Episodios}
             route={'Episodios'}
           />
+          <Stack.Screen name="Locais" component={Locais} route={'Locais'} />
         </Stack.Navigator>
       }
     </NavigationContainer>

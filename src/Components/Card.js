@@ -23,7 +23,7 @@ const Card = ({tipo, dados, lista}) => {
         <View
           style={{
             margin: 16,
-            maxWidth: tipo === 'episodio' ? 500 : 150,
+            maxWidth: tipo !== 'personagem' ? 500 : 150,
           }}>
           <Text style={{fontWeight: 'bold', lineHeight: 18}}>
             Nome: {dados.name}
@@ -51,23 +51,33 @@ const Card = ({tipo, dados, lista}) => {
               Data de exibição: {dados.air_date}
             </Text>
           ) : null}
+          {tipo === 'local' ? (
+            <Text style={{fontWeight: 'bold'}}>Tipo: {dados.type}</Text>
+          ) : null}
+          {tipo === 'local' ? (
+            <Text style={{fontWeight: 'bold'}}>
+              Dimensão: {dados.dimension}
+            </Text>
+          ) : null}
         </View>
       </View>
 
-      <TouchableOpacity
-        style={{alignSelf: 'center', marginTop: -5, marginBottom: 5}}
-        onPress={() => setListaState(!listaState)}>
-        <Text style={{fontWeight: 'bold'}}>
-          {listaState
-            ? tipo === 'personagem'
-              ? 'Ocultar Episódios'
-              : 'Ocultar Participantes'
-            : tipo === 'personagem'
-            ? 'Exibir Episódios'
-            : 'Exibir Participantes'}
-        </Text>
-      </TouchableOpacity>
-      {listaState ? (
+      {lista.length > 0 ? (
+        <TouchableOpacity
+          style={{alignSelf: 'center', marginTop: -5, marginBottom: 5}}
+          onPress={() => setListaState(!listaState)}>
+          <Text style={{fontWeight: 'bold'}}>
+            {listaState
+              ? tipo === 'personagem'
+                ? 'Ocultar Episódios'
+                : 'Ocultar Participantes'
+              : tipo === 'personagem'
+              ? 'Exibir Episódios'
+              : 'Exibir Participantes'}
+          </Text>
+        </TouchableOpacity>
+      ) : null}
+      {listaState && lista.length > 0 ? (
         <FlatList
           data={lista}
           renderItem={item => {

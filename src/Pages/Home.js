@@ -54,6 +54,12 @@ const Home = ({navigation}) => {
             navigation={navigation}
             route={'Episodios'}
           />
+          <BotaoMenu
+            nome={'Locais'}
+            imagem={'location'}
+            navigation={navigation}
+            route={'Locais'}
+          />
           <View style={{height: 100}} />
         </View>
       </ScrollView>
