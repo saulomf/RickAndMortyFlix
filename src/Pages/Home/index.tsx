@@ -9,7 +9,8 @@ import {
   View,
   TouchableOpacity,
 } from 'react-native';
-import BotaoMenu from '../Components/BotaoMenu';
+import BotaoMenu from '../../Components/MenuButton';
+import { styles } from './styles';
 
 const Home = ({navigation}) => {
   return (
@@ -19,26 +20,13 @@ const Home = ({navigation}) => {
         contentInsetAdjustmentBehavior="automatic"
         keyboardShouldPersistTaps={'always'}>
         <View
-          style={{
-            backgroundColor: '#404040',
-            alignItems: 'center',
-          }}>
+          style={styles.container}>
           <Text
-            style={{
-              fontSize: 18,
-              marginVertical: 20,
-              color: '#a6a6a6',
-              fontWeight: 'bold',
-            }}>
+            style={styles.titleText}>
             Bem vindo ao app de Rick and Morty
           </Text>
           <Text
-            style={{
-              fontSize: 14,
-              marginVertical: 20,
-              color: '#a6a6a6',
-              fontWeight: 'bold',
-            }}>
+            style={styles.subtitleText}>
             Encontre aqui informações sobre personagens e episódios do melhor
             desenho dos últimos anos
           </Text>
@@ -66,24 +54,5 @@ const Home = ({navigation}) => {
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
 
 export default Home;

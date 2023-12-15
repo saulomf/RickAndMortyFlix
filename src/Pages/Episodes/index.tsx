@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react';
-import apiGET from '../api';
+import apiGET from '../../api';
 import {View, FlatList, Button, Text, TextInput} from 'react-native';
-import Card from '../Components/Card';
+import Card from '../../Components/Card/Card';
+import { styles } from './styles';
 
 const Episodios = ({navigation}) => {
   const [episodios, setEpisodios] = useState([]);
@@ -70,20 +71,9 @@ const Episodios = ({navigation}) => {
 
   return (
     <View
-      style={{
-        backgroundColor: '#404040',
-        alignItems: 'center',
-        flex: 1,
-      }}>
+      style={styles.container}>
       <TextInput
-        style={{
-          height: 40,
-          width: 320,
-          margin: 12,
-          borderWidth: 1,
-          borderColor: '#a6a6a6',
-          padding: 10,
-        }}
+        style={styles.searchFieldtext}
         onChangeText={elemento => {
           onChangeText(elemento);
           atualizaLista();
@@ -93,12 +83,8 @@ const Episodios = ({navigation}) => {
         placeholder="Busque por nome"
       />
       <View
-        style={{
-          flexDirection: 'row',
-          alignSelf: 'flex-start',
-          marginHorizontal: 10,
-        }}>
-        <Text style={{marginHorizontal: 10, marginTop: 8}}>Ordenar:</Text>
+        style={styles.subtitleContainer}>
+        <Text style={styles.subtitleText}>Ordenar:</Text>
         <Button
           onPress={() => {
             setTipoOrdena('ZA');

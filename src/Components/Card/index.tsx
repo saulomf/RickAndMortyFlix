@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {View, Image, Text, TouchableOpacity, FlatList} from 'react-native';
+import { styles } from './styles';
 
 const Card = ({tipo, dados, lista}) => {
   //Padronização dos cards de episodios e personagens
@@ -8,15 +9,10 @@ const Card = ({tipo, dados, lista}) => {
   return (
     <View>
       <View
-        style={{
-          flexDirection: 'row',
-          borderWidth: 1,
-          borderColor: '#a6a6a6',
-          margin: 16,
-        }}>
+        style={styles.container}>
         {tipo === 'personagem' ? (
           <Image
-            style={{height: 150, width: 150, backgroundColor: '#ffffff'}}
+            style={styles.image}
             source={{uri: dados.image}}
           />
         ) : null}
@@ -25,37 +21,37 @@ const Card = ({tipo, dados, lista}) => {
             margin: 16,
             maxWidth: tipo !== 'personagem' ? 500 : 150,
           }}>
-          <Text style={{fontWeight: 'bold', lineHeight: 18}}>
+          <Text style={styles.subtitleText}>
             Nome: {dados.name}
           </Text>
           {tipo === 'personagem' ? (
-            <Text style={{fontWeight: 'bold', lineHeight: 18}}>
+            <Text style={styles.subtitleText}>
               Status: {dados.status}
             </Text>
           ) : null}
           {tipo === 'personagem' ? (
-            <Text style={{fontWeight: 'bold', lineHeight: 18}}>
+            <Text style={styles.subtitleText}>
               Espécie: {dados.species}
             </Text>
           ) : null}
           {tipo === 'personagem' ? (
-            <Text style={{fontWeight: 'bold', lineHeight: 18}}>
+            <Text style={styles.subtitleText}>
               Origem: {dados.origin.name}
             </Text>
           ) : null}
           {tipo === 'episodio' ? (
-            <Text style={{fontWeight: 'bold'}}>Episódio: {dados.episode}</Text>
+            <Text style={styles.regularText}>Episódio: {dados.episode}</Text>
           ) : null}
           {tipo === 'episodio' ? (
-            <Text style={{fontWeight: 'bold'}}>
+            <Text style={styles.regularText}>
               Data de exibição: {dados.air_date}
             </Text>
           ) : null}
           {tipo === 'local' ? (
-            <Text style={{fontWeight: 'bold'}}>Tipo: {dados.type}</Text>
+            <Text style={styles.regularText}>Tipo: {dados.type}</Text>
           ) : null}
           {tipo === 'local' ? (
-            <Text style={{fontWeight: 'bold'}}>
+            <Text style={styles.regularText}>
               Dimensão: {dados.dimension}
             </Text>
           ) : null}
@@ -64,7 +60,7 @@ const Card = ({tipo, dados, lista}) => {
 
       {lista.length > 0 ? (
         <TouchableOpacity
-          style={{alignSelf: 'center', marginTop: -5, marginBottom: 5}}
+          style={styles.centerButton}
           onPress={() => setListaState(!listaState)}>
           <Text style={{fontWeight: 'bold'}}>
             {listaState
@@ -90,7 +86,7 @@ const Card = ({tipo, dados, lista}) => {
               </Text>
             );
           }}
-          style={{alignSelf: 'center', marginHorizontal: 16}}
+          style={styles.list}
         />
       ) : null}
     </View>

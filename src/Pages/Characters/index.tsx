@@ -1,13 +1,23 @@
 import React, {useState, useEffect} from 'react';
-import apiGET from '../api';
-import {View, FlatList, Button, Text, TextInput} from 'react-native';
-import Card from '../Components/Card';
+import apiGET from '../../Services/api';
+import {
+  View,
+  FlatList,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  Text,
+  TextInput,
+  Button,
+} from 'react-native';
+import Card from '../../Components/Card';
+import { styles } from './styles';
 
-const Locais = ({navigation}) => {
-  const [locais, setLocais] = useState([]);
-  const [locaisCopia, setLocaisCopia] = useState([]);
-  const [text, onChangeText] = useState('');
+const Personagens = ({navigation}) => {
   const [personagens, setPersonagens] = useState([]);
+  const [personagensCopia, setPersonagensCopia] = useState([]);
+  const [text, onChangeText] = useState('');
+  const [episodios, setEpisodios] = useState([]);
   const [tipoOrdena, setTipoOrdena] = useState('');
 
   useEffect(() => {
@@ -18,51 +28,51 @@ const Locais = ({navigation}) => {
   async function getData() {
     // Responsável por recuperar dados da API
     const response = await apiGET({
-      query: `/location`,
-    });
-    setLocais(response);
-    setLocaisCopia(response);
-    const response2 = await apiGET({
       query: `/character`,
     });
-    setPersonagens(response2);
+    setPersonagens(response);
+    setPersonagensCopia(response);
+    const response2 = await apiGET({
+      query: `/episode`,
+    });
+    setEpisodios(response2);
   }
 
   const renderItem = ({item}) => {
-    const nomePersonagens = [];
-    item.residents.forEach(element => {
-      // Recupera o nome dos participantes do episódio
-      personagens.forEach(item => {
+    const nomeEpisodios = [];
+    item.episode.forEach(element => {
+      // Recupera o nome e numero dos episódios
+      episodios.forEach(item => {
         if (item.url === element) {
-          nomePersonagens.push({nome: item.name});
+          nomeEpisodios.push({episodio: item.episode, nome: item.name});
         }
       });
     });
-    return <Card tipo={'local'} dados={item} lista={nomePersonagens} />; //Renderiza todos os dados
+    return <Card tipo={'personagem'} dados={item} lista={nomeEpisodios} />; //Renderiza todos os dados
   };
 
   function atualizaLista() {
     //Atualiza a lista mostrada na tela e recupera a lista completa
     if (text === '') {
       //quando os filtros são removidos
-      setLocais(locaisCopia);
+      setPersonagens(personagensCopia);
     } else {
-      const filtrados = locaisCopia.filter(elemento => {
+      const filtrados = personagensCopia.filter(elemento => {
         return elemento.name.includes(text);
       });
-      setLocais(filtrados);
+      setPersonagens(filtrados);
     }
   }
 
   const ordenaLista = () => {
     //Ordena os episódios alfabeticamnete em ordem crescente e decrescente
-    let copia = locais;
+    let copia = personagens;
     if (tipoOrdena === 'AZ') {
-      setLocais(
+      setPersonagens(
         copia.sort((a, b) => (a.name > b.name ? 1 : b.name > a.name ? -1 : 0)),
       );
     } else if (tipoOrdena === 'ZA') {
-      setLocais(
+      setPersonagens(
         copia.sort((a, b) => (a.name > b.name ? -1 : b.name > a.name ? 1 : 0)),
       );
     }
@@ -70,20 +80,9 @@ const Locais = ({navigation}) => {
 
   return (
     <View
-      style={{
-        backgroundColor: '#404040',
-        alignItems: 'center',
-        flex: 1,
-      }}>
+      style={styles.container}>
       <TextInput
-        style={{
-          height: 40,
-          width: 320,
-          margin: 12,
-          borderWidth: 1,
-          borderColor: '#a6a6a6',
-          padding: 10,
-        }}
+        style={styles.searchFieldtext}
         onChangeText={elemento => {
           onChangeText(elemento);
           atualizaLista();
@@ -93,12 +92,8 @@ const Locais = ({navigation}) => {
         placeholder="Busque por nome"
       />
       <View
-        style={{
-          flexDirection: 'row',
-          alignSelf: 'flex-start',
-          marginHorizontal: 10,
-        }}>
-        <Text style={{marginHorizontal: 10, marginTop: 8}}>Ordenar:</Text>
+        style={styles.filterButton}>
+        <Text style={styles.filterButtonText}>Ordenar:</Text>
         <Button
           onPress={() => {
             setTipoOrdena('ZA');
@@ -117,11 +112,12 @@ const Locais = ({navigation}) => {
         />
       </View>
       <FlatList
-        data={locais}
+        data={personagens}
         renderItem={renderItem}
         keyExtractor={index => index.id}
+        extraData={personagens}
       />
     </View>
   );
 };
-export default Locais;
+export default Personagens;

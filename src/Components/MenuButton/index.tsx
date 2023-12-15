@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, Image, StyleSheet, TouchableOpacity, Text} from 'react-native';
+import { styles } from './styles';
 
 const BotaoMenu = ({navigation, nome, imagem, route}) => {
   //Padronização dos botões do menu inicial
@@ -19,27 +20,16 @@ const BotaoMenu = ({navigation, nome, imagem, route}) => {
 
   return (
     <View
-      style={{
-        flexDirection: 'column',
-        alignItems: 'center',
-        borderWidth: 1,
-        borderColor: '#a6a6a6',
-        margin: 20,
-      }}>
+      style={styles.container}>
       <TouchableOpacity
         onPress={() => {
           navigation.navigate(route);
         }}>
         <Image
-          style={{
-            height: 150,
-            width: 150,
-            backgroundColor: '#ffffff',
-            tintColor: '#2f2f2f',
-          }}
+          style={styles.image}
           source={getLocalImage()}
         />
-        <Text style={{alignSelf: 'center', fontWeight: 'bold'}}>{nome}</Text>
+        <Text style={styles.regulartext}>{nome}</Text>
       </TouchableOpacity>
     </View>
   );
